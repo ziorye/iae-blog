@@ -7,5 +7,5 @@ import org.springframework.data.domain.Page;
 public interface PostService {
     Page<Post> findAll(int pageNumber, int pageSize);
 
-    void savePost(PostDto postDto);
+    Post savePost(PostDto postDto);
 }
