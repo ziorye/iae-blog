@@ -1,8 +1,10 @@
 package com.ziorye.proofread.controller.backend;
 
 import com.ziorye.proofread.controller.WithMockUserForAdminBaseTest;
+import com.ziorye.proofread.dto.PostDto;
 import com.ziorye.proofread.entity.Post;
 import com.ziorye.proofread.repository.PostRepository;
+import com.ziorye.proofread.service.PostService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -65,5 +67,21 @@ class PostControllerTest extends WithMockUserForAdminBaseTest {
         Assertions.assertTrue(po.isPresent());
 
         postRepository.delete(po.get());
+    }
+
+    @Test
+    void indexWithSortByIdDescending(@Autowired PostService postService, @Autowired PostRepository postRepository) throws Exception {
+        PostDto postDto = new PostDto();
+        postDto.setUser_id(1L);
+        postDto.setTitle("title-" + UUID.randomUUID());
+        postDto.setContent("content-" + UUID.randomUUID());
+        Post post = postService.savePost(postDto);
+
+        mvc.perform(MockMvcRequestBuilders.get("/backend/posts"))
+                .andExpect(MockMvcResultMatchers.view().name("backend/post/index"))
+                .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString(postDto.getTitle())))
+        ;
+
+        postRepository.delete(post);
     }
 }
