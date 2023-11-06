@@ -1,14 +1,15 @@
 package com.ziorye.proofread.controller.backend;
 
+import com.ziorye.proofread.dto.PostDto;
 import com.ziorye.proofread.entity.Post;
 import com.ziorye.proofread.service.PostService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -27,5 +28,21 @@ public class PostController {
         Page<Post> pageContent = postService.findAll(currentPage, pageSize);
         model.addAttribute("page", pageContent);
         return "backend/post/index";
+    }
+
+    @GetMapping("post/create")
+    String create(Model model) {
+        model.addAttribute("post", new Post());
+        return "backend/post/create";
+    }
+
+    @PostMapping("post/store")
+    String store(@Valid @ModelAttribute("post") PostDto postDto,
+                 BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "backend/post/create";
+        }
+        postService.savePost(postDto);
+        return "redirect:/backend/posts";
     }
 }

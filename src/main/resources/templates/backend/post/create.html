@@ -1,0 +1,63 @@
+<div th:replace="~{ backend/app :: layout ('Create New Post', _, ~{::#main}, _) }" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <div class="content-wrapper" id="main">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-12 d-flex justify-content-between">
+                        <h1>Create New Post</h1>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <form id="post-form" method="post" action="#" th:action="@{/backend/post/store}" enctype="multipart/form-data" th:object="${post}">
+                                <div class="card-body">
+                                    <input type="hidden" name="id" th:value="*{id}">
+                                    <input type="hidden" name="user_id" th:value="${#authentication.principal.user.id}">
+
+                                    <div class="form-group">
+                                        <label for="title">标题</label>
+                                        <input th:field="*{title}" type="text" class="form-control" th:class="|form-control ${#fields.hasErrors('title') ? 'is-invalid' : ''}|" name="title" id="title" placeholder="标题" required>
+                                        <span th:if="${#fields.hasErrors('title')}" id="title-error" class="error invalid-feedback" th:errors="*{title}"></span>
+                                    </div>
+                                    <div class="form-group only-standard">
+                                        <label for="content">内容</label>
+                                        <div id="content">
+                                            <textarea th:field="*{content}" name="content" class="form-control" th:class="|form-control ${#fields.hasErrors('content') ? 'is-invalid' : ''}|" rows="6" required></textarea>
+                                            <span th:if="${#fields.hasErrors('content')}" id="content-error" class="error invalid-feedback" th:errors="*{content}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">描述</label>
+                                        <div id="description">
+                                            <textarea th:field="*{description}" name="description" class="form-control" rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status-select">状态</label>
+                                        <select th:field="*{status}" class="form-control" id="status-select" name="status">
+                                            <option value="1">发布</option>
+                                            <option value="0">草稿</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">保存</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+</div>

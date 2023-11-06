@@ -1,5 +1,6 @@
 package com.ziorye.proofread.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,19 +14,26 @@ public class Post {
     private Long id;
 
     String title;
+    @Nullable
     String slug;
+    @Nullable
     String cover;
+    @Nullable
     String description;
     String content;
-    boolean status;
-    String type;
+    boolean status = true;
+    String type = "post";
+    @Nullable
     String attachment;
-    boolean is_free;
+    boolean is_free = true;
+    @Nullable
     Double price;
-    int viewCount;
-    int replyCount;
-    LocalDateTime created_at;
+    int viewCount = 0;
+    int replyCount = 0;
+    LocalDateTime created_at = LocalDateTime.now();
+    @Nullable
     LocalDateTime updated_at;
+    @Nullable
     LocalDateTime deleted_at;
 
     @ManyToOne(
