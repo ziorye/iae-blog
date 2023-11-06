@@ -27,3 +27,6 @@ backend:
     - name: Users
       url: /backend/users
       icon: users
+    - name: "Posts"
+      url: "/backend/posts"
+      icon: "file-alt"
