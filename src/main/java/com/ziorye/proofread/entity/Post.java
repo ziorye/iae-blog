@@ -32,7 +32,7 @@ public class Post {
     Double price;
     int viewCount = 0;
     int replyCount = 0;
-    LocalDateTime created_at = LocalDateTime.now();
+    LocalDateTime created_at;
     @Nullable
     LocalDateTime updated_at;
     @Nullable
