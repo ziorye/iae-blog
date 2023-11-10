@@ -2,6 +2,7 @@ package com.ziorye.proofread.controller.backend;
 
 import com.ziorye.proofread.dto.PostDto;
 import com.ziorye.proofread.entity.Post;
+import com.ziorye.proofread.exception.PostNotFoundException;
 import com.ziorye.proofread.service.PostService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,30 @@ public class PostController {
         }
 
         postService.savePost(postDto);
+        return "redirect:/backend/posts";
+    }
+
+    @GetMapping("post/edit/{id}")
+    String edit(@PathVariable Long id, Model model) {
+        Optional<Post> optionalPost = postService.findById(id);
+        if (optionalPost.isEmpty()) {
+            throw new PostNotFoundException();
+        } else {
+            Post post = optionalPost.get();
+            model.addAttribute("post", post);
+            return "backend/post/edit";
+        }
+    }
+
+    @PutMapping("post/update")
+    String update(@Valid @ModelAttribute("post") PostDto postDto, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("post", postDto);
+            return "backend/post/edit";
+        }
+
+        postService.savePost(postDto);
+
         return "redirect:/backend/posts";
     }
 }

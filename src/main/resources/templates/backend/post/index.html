@@ -37,12 +37,12 @@
                                     <tr th:each="post, stats:${page.getContent()}">
                                         <td><input name="ids[]" type="checkbox" th:value="${post.id}" class="delete_checkbox"/></td>
                                         <th th:text="${post.id}">post id</th>
-                                        <td><a href="#" target="_blank" th:text="${post.title}">post tile</a></td>
+                                        <td><a th:href="@{'/backend/post/edit/' + ${post.id}}" th:text="${post.title}">post tile</a></td>
                                         <td th:text="${post.status}">post status</td>
                                         <td th:text="${post.type}">post type</td>
                                         <td th:text="${post.created_at}">post created_at</td>
                                         <td class="center">
-                                            <a href="#" class="text-sm">
+                                            <a th:href="@{'/backend/post/edit/' + ${post.id}}" class="text-sm">
                                                 Edit
                                             </a>
                                             <a class="text-sm pl-2" href="#">

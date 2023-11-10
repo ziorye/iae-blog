@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-12 d-flex justify-content-between">
-                        <h1>Create New Post</h1>
+                        <h1>Edit Post</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -17,10 +17,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <form id="post-form" method="post" action="#" th:action="@{/backend/post/store}" enctype="multipart/form-data" th:object="${post}">
+                            <form id="post-form" method="post" action="#" th:action="@{/backend/post/update}" enctype="multipart/form-data" th:object="${post}">
+                                <input type="hidden" name="_method" value="PUT">
                                 <div th:replace="~{fragment :: #post-form-items}"></div>
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">保存</button>
+                                    <button type="submit" class="btn btn-primary">更新</button>
                                 </div>
                             </form>
                         </div>

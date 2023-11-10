@@ -17,5 +17,44 @@
   </nav>
 </div>
 
+<div class="card-body" id="post-form-items">
+  <input type="hidden" name="id" th:value="*{id}">
+  <input type="hidden" name="user_id" th:value="${#authentication.principal.user.id}">
+
+  <div class="form-group">
+    <label for="title">标题</label>
+    <input th:field="*{title}" type="text" class="form-control" th:class="|form-control ${#fields.hasErrors('title') ? 'is-invalid' : ''}|" name="title" id="title" placeholder="标题" required>
+    <span th:if="${#fields.hasErrors('title')}" id="title-error" class="error invalid-feedback" th:errors="*{title}"></span>
+  </div>
+  <div class="form-group only-standard">
+    <label for="content">内容</label>
+    <div id="content">
+      <textarea th:field="*{content}" name="content" class="form-control" th:class="|form-control ${#fields.hasErrors('content') ? 'is-invalid' : ''}|" rows="6" required></textarea>
+      <span th:if="${#fields.hasErrors('content')}" id="content-error" class="error invalid-feedback" th:errors="*{content}"></span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description">描述</label>
+    <div id="description">
+      <textarea th:field="*{description}" name="description" class="form-control" rows="2"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="status-select">状态</label>
+    <select th:field="*{status}" class="form-control" id="status-select" name="status">
+      <option value="1">发布</option>
+      <option value="0">草稿</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="cover">封面图片</label>
+    <div>
+      <input type="file" name="coverFile" id="cover" class="d-block">
+      <input th:field="*{cover}" type="hidden" name="cover">
+      <img th:if="!${#strings.isEmpty(post.cover)}" th:src="*{cover}" width="200" class="img-fluid blog-post-cover mt-2" alt="blog-post-cover">
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
