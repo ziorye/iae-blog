@@ -93,7 +93,7 @@ class PostControllerTest extends WithMockUserForAdminBaseTest {
         Assertions.assertTrue(po.isPresent());
 
         String cover = po.get().getCover();
-        File coverOnDisk = new File(env.getProperty("custom.upload.base-path") + File.separator + cover);
+        File coverOnDisk = new File(env.getProperty("custom.upload.base-path") + cover);
         Assertions.assertTrue(Files.exists(coverOnDisk.toPath()));
         Assertions.assertTrue(coverOnDisk.delete());
 
