@@ -47,13 +47,13 @@ public class PostController {
     String postCoverDirUnderBasePath;
 
     @PostMapping("post/store")
-    String store(@RequestParam("coverFile") MultipartFile file, @Valid @ModelAttribute("post") PostDto postDto,
+    String store(@RequestParam(value = "coverFile", required = false) MultipartFile file, @Valid @ModelAttribute("post") PostDto postDto,
                  BindingResult result, Model model) throws IOException {
         if (result.hasErrors()) {
             return "backend/post/create";
         }
 
-        if (!file.isEmpty()) {
+        if (file != null && !file.isEmpty()) {
             File dir = new File(uploadBasePath + File.separator + postCoverDirUnderBasePath);
             if (!dir.exists()) {
                 dir.mkdirs();
