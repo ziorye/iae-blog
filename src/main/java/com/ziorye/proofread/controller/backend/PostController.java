@@ -96,4 +96,10 @@ public class PostController {
 
         return "redirect:/backend/posts";
     }
+
+    @DeleteMapping("post/destroy/{id}")
+    String destroy(@PathVariable Long id) {
+        postService.destroy(id);
+        return "redirect:/backend/posts";
+    }
 }

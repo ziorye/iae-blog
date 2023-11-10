@@ -12,4 +12,6 @@ public interface PostService {
     Post savePost(PostDto postDto);
 
     Optional<Post> findById(Long id);
+
+    void destroy(Long id);
 }
