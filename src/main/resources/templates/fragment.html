@@ -76,6 +76,14 @@
         cache: {
           enable: false,
         },
+        upload: {
+          url: '/backend/images/uploadFromVditor',
+          fieldName: 'image[]',
+          max: 10 * 1024 * 1024,
+          headers: {
+            'accept': 'application/json',
+          },
+        }
       })
 
       $("#post-form").submit(function() {
