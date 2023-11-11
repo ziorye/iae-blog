@@ -28,9 +28,8 @@
   </div>
   <div class="form-group only-standard">
     <label for="content">内容</label>
-    <div id="content">
-      <textarea th:field="*{content}" name="content" class="form-control" th:class="|form-control ${#fields.hasErrors('content') ? 'is-invalid' : ''}|" rows="6" required></textarea>
-      <span th:if="${#fields.hasErrors('content')}" id="content-error" class="error invalid-feedback" th:errors="*{content}"></span>
+    <div id="content" style="z-index: 1080">
+      <textarea name="content" class="form-control" rows="6" required th:utext="*{content}"></textarea>
     </div>
   </div>
   <div class="form-group">
@@ -54,6 +53,42 @@
       <img th:if="!${#strings.isEmpty(post.cover)}" th:src="*{cover}" width="200" class="img-fluid blog-post-cover mt-2" alt="blog-post-cover">
     </div>
   </div>
+</div>
+
+<link id="css_content" rel="stylesheet" href="/vendor/vditor/dist/index.css">
+
+<div id="js_content">
+  <script src="/vendor/vditor/dist/index.min.js" defer></script>
+  <script>
+    $(function() {
+      let vditor = new Vditor('content', {
+        mode: 'sv',
+        height: 500,
+        cdn: '/vendor/vditor',
+        preview: {
+          theme: {
+            path: '/vendor/vditor/dist/css/content-theme',
+          }
+        },
+        counter: {
+          enable: true,
+        },
+        cache: {
+          enable: false,
+        },
+      })
+
+      $("#post-form").submit(function() {
+        $(this).append(
+                $('<textarea />').attr("id", "content-textarea")
+                        .attr("class", "d-none")
+                        .attr('name', 'content')
+        );
+        $('#content-textarea').val(vditor.getValue());
+        return true;
+      });
+    });
+  </script>
 </div>
 
 </body>
