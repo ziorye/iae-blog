@@ -83,6 +83,16 @@
           headers: {
             'accept': 'application/json',
           },
+          linkToImgUrl: '/backend/images/uploadLinkFromPasteToVditor',
+          linkToImgFormat: function (responseText) {
+            vditor.setValue(vditor.getValue().replace(JSON.parse(responseText).data.originalURL, JSON.parse(responseText).data.url));
+            /**
+             * Uncaught SyntaxError: Unexpected token u in JSON at position 0
+             * at JSON.parse (<anonymous>)
+             * at XMLHttpRequest.i.onreadystatechange (index.min.js:27)
+             */
+            // It may be a bug in vditor
+          }
         }
       })
 
