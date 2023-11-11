@@ -1,0 +1,19 @@
+.vditor-reset {
+    font-family: $font-family-sans-serif;
+
+    h2 {
+        border-bottom: none;
+    }
+
+    a {
+        color: $primary;
+        &:hover {
+            color: darken($primary, 15%);
+        }
+    }
+
+    img {
+        box-shadow: $box-shadow-sm;
+        border-radius: $border-radius
+    }
+}

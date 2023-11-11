@@ -17,4 +17,6 @@ public interface PostService {
     void destroy(Long id);
 
     void destroyAllById(List<Long> ids);
+
+    Page<Post> findAllPosts(int pageNumber, int pageSize);
 }
