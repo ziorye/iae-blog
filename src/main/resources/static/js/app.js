@@ -22,3 +22,34 @@ if (document.getElementById("typed-strings")) {
 }
 
 import 'animate.css';
+
+import $ from 'jquery'
+window.jQuery = window.$ = $
+
+// extend jQuery to add a function that does it animate css
+$.fn.extend({
+    animateCss: function(animationName, callback) {
+        let animationEnd = (function(el) {
+            let animations = {
+                animation: 'animationend',
+                OAnimation: 'oAnimationEnd',
+                MozAnimation: 'mozAnimationEnd',
+                WebkitAnimation: 'webkitAnimationEnd',
+            };
+
+            for (let t in animations) {
+                if (el.style[t] !== undefined) {
+                    return animations[t];
+                }
+            }
+        })(document.createElement('div'));
+
+        this.addClass('animate__animated ' + 'animate__' + animationName).one(animationEnd, function() {
+            $(this).removeClass('animate__animated ' + 'animate__' + animationName);
+
+            if (typeof callback === 'function') callback();
+        });
+
+        return this;
+    },
+});

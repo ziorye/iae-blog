@@ -6,7 +6,7 @@
                     <article th:class="|border-bottom h-100 pb-5 ${stats.index > 0 ? 'pt-5' : '' } ${ stats.index < 2 ? 'pt-md-0' : '' }|">
                         <div class="row justify-content-between">
                             <div class="col-7">
-                                <h2 class="mb-2 h5"><a class="text-inherit" href="#" th:text="${post.title}">{{ $post->title }}</a></h2>
+                                <h2 class="mb-2 h5"><a class="text-inherit" th:href="@{'/posts/' + ${post.id}}" th:text="${post.title}">{{ $post->title }}</a></h2>
                                 <div class="small text-muted">
                                     <span th:text="${post.user.name}">{{ $post->user->name }}</span>
                                     <span> - </span>
@@ -15,7 +15,7 @@
                             </div>
                             <div class="col-5">
                                 <div class="d-flex">
-                                    <a href="#" class="w-100">
+                                    <a th:href="@{'/posts/' + ${post.id}}" class="w-100">
                                         <img class="img-fluid shadow-sm rounded ratio-16x9" th:src="${post.cover}">
                                     </a>
                                 </div>

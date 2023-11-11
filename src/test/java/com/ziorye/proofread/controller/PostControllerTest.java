@@ -51,4 +51,24 @@ class PostControllerTest {
 
         postRepository.deleteAllById(ids);
     }
+
+    @Test
+    void show() throws Exception {
+        Post post = new Post();
+        post.setCreated_at(LocalDateTime.now());
+        String title = UUID.randomUUID().toString();
+        post.setTitle(title);
+        post.setContent(UUID.randomUUID().toString());
+        post.setUser(new User(1L));
+        postRepository.save(post);
+
+        mvc.perform(MockMvcRequestBuilders
+                        .get("/posts/" + post.getId()))
+                .andExpect(MockMvcResultMatchers.view().name("post/show"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("post"))
+                .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString(title)))
+        ;
+
+        postRepository.deleteById(post.getId());
+    }
 }
