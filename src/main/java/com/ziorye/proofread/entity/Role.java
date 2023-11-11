@@ -3,8 +3,8 @@ package com.ziorye.proofread.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -22,5 +22,5 @@ public class Role {
             joinColumns = @JoinColumn(name = "role_id", referencedColumnName="id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id", referencedColumnName="id")
     )
-    private List<Permission> permissions = new ArrayList<>();
+    private Set<Permission> permissions = new HashSet<>();
 }

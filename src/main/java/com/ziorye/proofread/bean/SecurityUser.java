@@ -28,7 +28,7 @@ public class SecurityUser implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<String> permissions = new ArrayList<>();
-        List<Role> roles = this.user.getRoles();
+        Set<Role> roles = this.user.getRoles();
         for (Role role : roles) {
             permissions.add("ROLE_" + role.getName());
             for (Permission permission : role.getPermissions()) {
