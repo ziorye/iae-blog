@@ -4,6 +4,7 @@ import com.ziorye.proofread.dto.PostDto;
 import com.ziorye.proofread.entity.Post;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PostService {
@@ -14,4 +15,6 @@ public interface PostService {
     Optional<Post> findById(Long id);
 
     void destroy(Long id);
+
+    void destroyAllById(List<Long> ids);
 }

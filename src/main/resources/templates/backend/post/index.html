@@ -91,6 +91,27 @@
     }
 
     function do_delete(ids) {
-        console.log(ids);
+        if (confirm('Are you sure you want to remove? (id=' + ids + ')')) {
+            $.ajax({
+                url: '/backend/post/destroy',
+                data: {
+                    ids: ids
+                },
+                type: "DELETE",
+            })
+                .done(function (response) {
+                    if ('DONE' === response) {
+                        location.href = '/backend/posts';
+                    } else {
+                        console.log(response);
+                        alert(response);
+                    }
+                })
+                .fail(function (xhr, status, errorThrown) {
+                    alert("Sorry, there was a problem!");
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                })
+        }
     }
 </script>

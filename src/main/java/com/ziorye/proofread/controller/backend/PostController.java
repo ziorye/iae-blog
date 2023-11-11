@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -101,5 +102,12 @@ public class PostController {
     String destroy(@PathVariable Long id) {
         postService.destroy(id);
         return "redirect:/backend/posts";
+    }
+
+    @DeleteMapping("post/destroy")
+    @ResponseBody
+    String destroyBatch(@RequestParam(value = "ids[]") List<Long> ids) {
+        postService.destroyAllById(ids);
+        return "DONE";
     }
 }

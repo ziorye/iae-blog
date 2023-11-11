@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,5 +55,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public void destroy(Long id) {
         this.postRepository.deleteById(id);
+    }
+
+    @Override
+    public void destroyAllById(List<Long> ids) {
+        this.postRepository.deleteAllById(ids);
     }
 }
