@@ -69,7 +69,7 @@ class UserControllerTest {
                 )
                 .andExpect(SecurityMockMvcResultMatchers.authenticated())
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-                .andExpect(MockMvcResultMatchers.redirectedUrl("/user/dashboard"))
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/"))
         ;
     }
 

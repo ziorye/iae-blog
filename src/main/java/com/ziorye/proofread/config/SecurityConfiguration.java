@@ -30,7 +30,7 @@ public class SecurityConfiguration {
                         .loginProcessingUrl("/login")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/user/dashboard", true)
+                        //.defaultSuccessUrl("/user/dashboard", true)
                 )
                 .logout((logout) -> logout
                         .logoutUrl("/logout")
