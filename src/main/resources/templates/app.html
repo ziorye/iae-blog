@@ -52,6 +52,12 @@
                             博客
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a th:class="|nav-link d-flex align-items-center ${#strings.startsWith(requestURI, '/resource') ? ' active' : ''}|" href="#" th:href="@{/resources}">
+                            <i class="bi bi-box"></i>
+                            资源
+                        </a>
+                    </li>
 
                     <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
