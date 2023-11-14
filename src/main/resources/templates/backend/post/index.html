@@ -37,16 +37,18 @@
                                     <tr th:each="post, stats:${page.getContent()}">
                                         <td><input name="ids[]" type="checkbox" th:value="${post.id}" class="delete_checkbox"/></td>
                                         <th th:text="${post.id}">post id</th>
-                                        <td><a th:href="@{'/backend/post/edit/' + ${post.id}}" th:text="${post.title}">post tile</a></td>
+                                        <td><a th:href="@{'/' + ${post.type} + 's/' + ${post.id}}" th:text="${post.title}" target="_blank">post tile</a></td>
                                         <td th:text="${post.status}">post status</td>
                                         <td th:text="${post.type}">post type</td>
                                         <td th:text="${post.created_at}">post created_at</td>
                                         <td class="center">
                                             <a th:href="@{'/backend/post/edit/' + ${post.id}}" class="text-sm">
+                                                <i class="fas fa-edit"></i>
                                                 Edit
                                             </a>
-                                            <a class="text-sm pl-2" href="#" th:href="@{'/backend/post/destroy/' + ${post.id}}"
+                                            <a class="text-sm pl-3" href="#" th:href="@{'/backend/post/destroy/' + ${post.id}}"
                                                th:onclick="|event.preventDefault(); if(confirm('Are you sure you want to Remove?')) document.getElementById('destroy-form-${post.id}').submit();|">
+                                                <i class="fas fa-trash"></i>
                                                 Remove
                                                 <form th:id="${'destroy-form-' + post.id}" th:action="@{'/backend/post/destroy/' + ${post.id}}" th:method="delete" style="display: none;">
                                                 </form>
