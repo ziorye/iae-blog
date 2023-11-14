@@ -36,7 +36,9 @@ public class PostController {
     String show(@PathVariable Long id, Model model) {
         Optional<Post> optionalPost = postService.findById(id);
 
-        if (optionalPost.isEmpty() || !optionalPost.get().isStatus()) {
+        if (optionalPost.isEmpty() || !optionalPost.get().isStatus()
+                || !"post".equals(optionalPost.get().getType())
+        ) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 

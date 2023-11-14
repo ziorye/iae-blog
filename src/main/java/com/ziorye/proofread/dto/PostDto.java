@@ -1,6 +1,7 @@
 package com.ziorye.proofread.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
@@ -15,6 +16,9 @@ public class PostDto {
     private String content;
 
     private String description;
+
+    @Pattern(regexp = "post|resource")
+    private String type = "post";
 
     private boolean status;
 

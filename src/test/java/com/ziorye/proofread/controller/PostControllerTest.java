@@ -71,4 +71,29 @@ class PostControllerTest {
 
         postRepository.deleteById(post.getId());
     }
+
+    @Test
+    void showWithIncorrectType() throws Exception {
+        String incorrectType = "resource";
+        Post post = new Post();
+        post.setCreated_at(LocalDateTime.now());
+        String title = UUID.randomUUID().toString();
+        post.setTitle(title);
+        post.setContent(UUID.randomUUID().toString());
+        post.setUser(new User(1L));
+        post.setType(incorrectType);
+        postRepository.save(post);
+
+        mvc.perform(MockMvcRequestBuilders
+                        .get("/posts/" + post.getId()))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+        ;
+
+        mvc.perform(MockMvcRequestBuilders
+                        .get("/resources/" + post.getId()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+        ;
+
+        postRepository.deleteById(post.getId());
+    }
 }

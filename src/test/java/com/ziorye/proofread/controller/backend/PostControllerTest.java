@@ -245,4 +245,19 @@ class PostControllerTest extends WithMockUserForAdminBaseTest {
             Assertions.assertTrue(op.isEmpty());
         }
     }
+
+    @Test
+    void storeWithIncorrectType() throws Exception {
+        String incorrectType = "Incorrect-Type";
+        mvc.perform(MockMvcRequestBuilders.post("/backend/post/store")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("id", "")
+                        .param("user_id", "1")
+                        .param("title", "title-" + UUID.randomUUID())
+                        .param("content", "content-" + UUID.randomUUID())
+                        .param("type", incorrectType)
+                )
+                .andExpect(MockMvcResultMatchers.model().attributeHasFieldErrorCode("post", "type", "Pattern"))
+        ;
+    }
 }

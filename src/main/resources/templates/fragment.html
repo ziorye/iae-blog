@@ -39,6 +39,14 @@
     </div>
   </div>
   <div class="form-group">
+    <label for="type-select">类型</label>
+    <select th:field="*{type}" class="form-control" th:class="|form-control ${#fields.hasErrors('type') ? 'is-invalid' : ''}|" id="type-select" name="type">
+      <option value="post">博客</option>
+      <option value="resource">资源</option>
+    </select>
+    <span th:if="${#fields.hasErrors('type')}" id="type-error" class="error invalid-feedback" th:errors="*{type}"></span>
+  </div>
+  <div class="form-group">
     <label for="status-select">状态</label>
     <select th:field="*{status}" class="form-control" id="status-select" name="status">
       <option value="1">发布</option>
