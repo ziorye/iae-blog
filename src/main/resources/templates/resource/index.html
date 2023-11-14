@@ -4,14 +4,14 @@
             <div class="row justify-content-lg-between align-items-lg-center no-gutters">
                 <div th:class="|col-lg-4 ${stats.even ? 'order-1 order-lg-2' : '' }|">
                     <div class="mb-4">
-                        <h2><a href="#" th:text="${post.title}"></a></h2>
+                        <h2><a href="#" th:href="@{'/resources/' + ${post.id}}" th:text="${post.title}"></a></h2>
                         <p th:text="${post.description}"></p>
                     </div>
-                    <a class="btn btn-primary transition-3d-hover" href="#">查看详情</a>
+                    <a class="btn btn-primary transition-3d-hover" href="#" th:href="@{'/resources/' + ${post.id}}">查看详情</a>
                 </div>
 
                 <div th:class="|col-lg-7 space-top-1 space-top-sm-2 ${stats.even ? 'order-2 order-lg-1' : '' }|">
-                    <a href="#"><img class="img-fluid shadow-lg" th:src="${post.cover}" width="755" height="470" th:alt="${post.title}"></a>
+                    <a href="#" th:href="@{'/resources/' + ${post.id}}"><img class="img-fluid shadow-lg" th:src="${post.cover}" width="755" height="470" th:alt="${post.title}"></a>
                 </div>
             </div>
         </div>
