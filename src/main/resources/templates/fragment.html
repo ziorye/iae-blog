@@ -61,14 +61,76 @@
       <img th:if="!${#strings.isEmpty(post.cover)}" th:src="*{cover}" width="200" class="img-fluid blog-post-cover mt-2" alt="blog-post-cover">
     </div>
   </div>
+  <div class="form-group" id="attachment-wrapper">
+    <label for="attachment-input">附件📎</label>
+    <div>
+      <p><i th:text="*{attachment}"></i></p>
+      <input type="hidden" name="attachment" id="attachment-input">
+    </div>
+  </div>
+  <div class="w-50" id="filepond-wrapper">
+    <!-- We'll transform this input into a pond -->
+    <input type="file" class="filepond">
+  </div>
 </div>
 
-<link id="css_content" rel="stylesheet" href="/vendor/vditor/dist/index.css">
+<!-- todo: css_content replace -->
+<div id="css_content">
+  <link rel="stylesheet" href="/vendor/vditor/dist/index.css">
+
+  <!-- Filepond stylesheet -->
+  <link th:href="@{/vendor/filepond/filepond.css}" rel="stylesheet">
+</div>
 
 <div id="js_content">
   <script src="/vendor/vditor/dist/index.min.js" defer></script>
+
+  <!-- include FilePond library -->
+  <script th:src="@{/vendor/filepond/filepond.min.js}"></script>
+  <!-- include FilePond plugins -->
+  <script th:src="@{/vendor/filepond/filepond-plugin-file-validate-type.js}"></script>
+  <!-- include FilePond jQuery adapter -->
+  <script th:src="@{/vendor/filepond/filepond.jquery.js}"></script>
   <script>
     $(function() {
+      let typeSelect = $('select[name="type"]');
+      typeSelect.on('change', function () {
+        if ('resource' === $(this).val()) {
+          $('#attachment-wrapper').show();$('#filepond-wrapper').show();
+        } else {
+          $('#attachment-wrapper').hide();$('#filepond-wrapper').hide();
+        }
+      });
+      typeSelect.trigger('change')
+
+      // Register the plugin
+      $.fn.filepond.registerPlugin(FilePondPluginFileValidateType);
+      // Turn input element into a pond
+      $('.filepond').filepond({
+        credits: false,
+        allowMultiple: true,
+        //allowReorder: true,
+        //instantUpload: false,
+        chunkUploads: true,
+        chunkForce: true,
+        acceptedFileTypes: ['application/zip', 'application/rar', 'application/tar', 'application/tar.gz'],
+        server:{
+          //chunkSize: 50000000,
+          url: '/',
+          process: './file/process',
+          patch: './file/patch/',
+          //revert: './file/revert',
+          //restore: './file/restore/',
+          load: './file/load/',
+          fetch: './file/fetch/'
+        },
+        onprocessfile: (error, file) => {
+          $('input[name=attachment]').val("/chunked/" + file.serverId + '.' + file.fileExtension)
+        }
+      });
+
+      // === === ===
+
       let vditor = new Vditor('content', {
         mode: 'sv',
         height: 500,

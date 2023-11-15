@@ -23,4 +23,6 @@ public class PostDto {
     private boolean status;
 
     private String cover;
+
+    private String attachment;
 }
