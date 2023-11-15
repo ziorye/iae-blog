@@ -9,7 +9,7 @@
                             <p th:text="${post.description}"></p>
                         </div>
                         <div>
-                            <a href="#" class="btn btn-primary transition-3d-hover">免费下载</a>
+                            <a href="#" th:href="${'/resources/download/' + post.getId()}" class="btn btn-primary transition-3d-hover">免费下载</a>
                         </div>
                     </div>
 
