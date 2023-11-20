@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.ziorye</groupId>
-    <artifactId>iae-proofread</artifactId>
+    <artifactId>iae-blog</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>iae-proofread</name>
-    <description>iae-proofread</description>
+    <name>iae-blog</name>
+    <description>iae-blog</description>
     <properties>
         <java.version>17</java.version>
     </properties>
