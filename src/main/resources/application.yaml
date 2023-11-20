@@ -1,9 +1,9 @@
 spring:
   application:
-    name: Proofread
+    name: My Blog
 
   datasource:
-    url: jdbc:mysql://localhost:3306/iae-proofread?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/iae-blog?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=utf8
     username: root
     password: secret_mysql
     driver-class-name: com.mysql.cj.jdbc.Driver

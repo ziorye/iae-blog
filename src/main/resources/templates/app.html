@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title th:text="|${title} - ${@environment.getProperty('spring.application.name')}|">example</title>
-    <meta name="description" content='校對，是出版編輯過程裡的一個必須工序，主要工作是按照原稿去審查訂正排印或繕寫的錯誤。校對也可以是從事這個工序的人員──校對員（Proof reader）的中文簡稱。《南宋館閣錄》「卷三」《儲藏》記載："諸字有誤者，以雌黃塗訖，別書。或多字，以雌黃圈之；少者，於字旁添入；或字側不容注者，即用朱圈，仍於本行上下空紙上標寫。倒置，於兩字間書乙字。諸點語斷處，以側為正；其有人名、地點、物名等合細分者，即於中間細點。'>
-    <meta name="keywords" content="校对,校對,proof,proofread">
+    <title th:text="|${title} - ${@environment.getProperty('spring.application.name')}|">My Blog</title>
+    <meta name="description" content='博客。记录零散的所思所想。'>
+    <meta name="keywords" content="博客,blog">
     <lms:vite type="css"/>
     <link rel="stylesheet" href="/webjars/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css"></link>
 </head>
@@ -40,12 +40,6 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto d-flex align-items-lg-center">
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center " href="#">
-                            <i class="bi bi-collection"></i>
-                            文档
-                        </a>
-                    </li>
                     <li class="nav-item">
                         <a th:class="|nav-link d-flex align-items-center ${#strings.startsWith(requestURI, '/post') ? ' active' : ''}|" href="#" th:href="@{/posts}">
                             <i class="bi bi-card-text"></i>
@@ -88,7 +82,7 @@
 <footer class="custom-footer mt-auto">
     <div class="container text-muted">
         <p class="text-center text-lg-left">
-            <span title='《南宋館閣錄》「卷三」《儲藏》記載："諸字有誤者，以雌黃塗訖，別書。或多字，以雌黃圈之；少者，於字旁添入；或字側不容注者，即用朱圈，仍於本行上下空紙上標寫。倒置，於兩字間書乙字。諸點語斷處，以側為正；其有人名、地點、物名等合細分者，即於中間細點。"'>校對 •《南宋館閣錄》卷三《儲藏》•「諸字有誤者，以雌黃塗訖，別書...」</span>
+            <span>博客 • 记录零散的所思所想</span>
         </p>
     </div>
 </footer>
