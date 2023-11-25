@@ -61,7 +61,7 @@ public class UserController {
 
         if(result.hasErrors()){
             model.addAttribute("user", userDto);
-            return "/user/register";
+            return "user/register";
         }
 
         userService.saveUser(userDto);
@@ -155,7 +155,7 @@ public class UserController {
                                 RedirectAttributes attributes) {
         if(result.hasErrors()){
             attributes.addFlashAttribute("passwordResetDto", passwordResetDto);
-            return "/user/do-password-reset";
+            return "user/do-password-reset";
         }
 
         PasswordResetToken token = passwordResetTokenService.findByToken(passwordResetDto.getToken());
