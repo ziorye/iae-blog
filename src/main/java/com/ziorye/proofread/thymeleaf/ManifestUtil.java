@@ -1,11 +1,12 @@
 package com.ziorye.proofread.thymeleaf;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.util.ResourceUtils;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
 
 public class ManifestUtil {
 
@@ -14,10 +15,12 @@ public class ManifestUtil {
 
     public ManifestUtil() {
         try {
-            File file = ResourceUtils.getFile("classpath:static/build/manifest.json");
-            String json = Files.readString(file.toPath());
+            InputStream inputStream = getClass().getResourceAsStream("/static/build/manifest.json");
+            assert inputStream != null;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String contents = reader.lines().collect(Collectors.joining(System.lineSeparator()));
             ObjectMapper objectMapper = new ObjectMapper();
-            this.manifest = objectMapper.readValue(json, Manifest.class);
+            this.manifest = objectMapper.readValue(contents, Manifest.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
