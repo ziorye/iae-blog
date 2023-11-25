@@ -1,0 +1,36 @@
+services:
+  app:
+    build: .
+    container_name: blog-app
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    environment:
+      MYSQL_HOST: blog-db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret_mysql
+      MYSQL_PORT: 3306
+      MAIL_HOST: blog-mail
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: blog-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: iae-blog
+      MYSQL_ROOT_PASSWORD: secret_mysql
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - 3306:3306
+    volumes:
+      #- ./docker-compose/mysql:/docker-entrypoint-initdb.d
+      - ./docker/mysql/data:/var/lib/mysql
+
+  mail:
+    image: 'mailhog/mailhog:latest'
+    container_name: blog-mail
+    ports:
+      - 1025:1025
+      - 8025:8025
