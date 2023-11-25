@@ -11,6 +11,8 @@ services:
       MYSQL_PASSWORD: secret_mysql
       MYSQL_PORT: 3306
       MAIL_HOST: blog-mail
+    volumes:
+      - ./upload:/app/upload
     depends_on:
       - db
 
